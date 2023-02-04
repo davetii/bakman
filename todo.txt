@@ -1,0 +1,16 @@
+Setup Yargs
+    read in a target folder
+        source=
+        node index.js readpath --source="Q:\movies"
+        node index.js readpath --source="D:\temp\t1"
+        node index.js pathsize --source="D:\temp\t1"
+        
+    use claw to read directory
+
+    read in a file return stats
+    
+    node index.js read --source="D:\temp\t1\(1972) Godzilla Vs Gigan.avi"
+    node index.js filesize --source="D:\temp\t1\(1972) Godzilla Vs Gigan.avi"
+    node index.js filestars --source="D:\temp\t1\(1972) Godzilla Vs Gigan.avi"
+    
+
