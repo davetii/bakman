@@ -22,3 +22,11 @@ node index.js filestats --source="D:\temp\t1\(1972) Godzilla Vs Gigan.avi"
 * read a source directory in
 ** copy to backup location
 ** Add row to DB
+
+## Functions
+* fileSize
+* fileStats
+* calculate a Directories Size
+* Create a list of files in a directory
+
+
