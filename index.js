@@ -1,25 +1,25 @@
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
-import {readPath, fileSize, dirSize, fileStats} from './util.js';
+import * as fu from './file-utils.js';
 
 async function calcPathsFileSize(path) {
-    const items = await dirSize(path);
-    const promise = calcSize(items);
+    const items = await fu.readPath(path);
+    const promise = fu.dirSize(items);
     promise.then((data) => console.log("data: " + data));
 }
 
 async function displayPath(path) {
-    const items = await readPath(path);
+    const items = await fu.readPath(path);
     console.log(items);
 }
 
 async function readFileSize(path) {
-    const data = await fileSize(path);
+    const data = await fu.fileSize(path);
     console.log(data);
 }
 
 async function readFileStats(path) {
-    const data = await fileStats(path);
+    const data = await fu.fileStats(path);
     console.log(data);
 }
 
@@ -47,7 +47,7 @@ yargs(hideBin(process.argv))
     'read file size', 
     {}, 
     (argv) => { 
-        console.log(readFileSize(argv.source));
+        readFileSize(argv.source);
   })
 
   .command(

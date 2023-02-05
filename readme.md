@@ -11,15 +11,18 @@ git clone
 
 `node index.js pathsize --source="D:\temp\t1"`
 
-`node index.js read --source="D:\temp\t1\(1972) Godzilla Vs Gigan.avi"`
-
 `node index.js filesize --source="D:\temp\t1\(1972) Godzilla Vs Gigan.avi"`
 
 `node index.js filestats --source="D:\temp\t1\(1972) Godzilla Vs Gigan.avi"`
 
+`node index.js copyfile --source="D:\temp\t1\(1972) Godzilla Vs Gigan.avi" --target="D:\temp\t2\(1972) Godzilla Vs Gigan.avi"`
+
 
 ## TODO
-* implement check if file exsits in target path
+* Implement test lib
+* File Copy function
+* test for path
+* Create path
 * Implement sqllite DB
 * Create data model
 * read a source directory in
