@@ -19,7 +19,6 @@ describe('ensure file-utils function as expected', ()=> {
         });
     })
 
-
     context('ensure dirSize returns expected', () => {
         it ('should return correct dirSize', async () => {
             const items = await fu.readPath('test-content' + sep + 'do-not-change');            
@@ -27,6 +26,4 @@ describe('ensure file-utils function as expected', ()=> {
             assert.equal(actualDirSize, 100518);
         });
     })
-
-
 })

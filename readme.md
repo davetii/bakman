@@ -19,10 +19,9 @@ git clone
 
 
 ## TODO
-* Implement test lib
-* File Copy function
 * test for path
 * Create path
+* File Copy function
 * Implement sqllite DB
 * Create data model
 * read a source directory in
