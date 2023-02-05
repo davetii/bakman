@@ -24,7 +24,11 @@ export async function readPath(path)  {
   return new Promise((resolve, reject) => {
     const items = []
     klaw(path)
-    .on('data', item => items.push(item.path))
+    .on('data', item => {
+      if(item != path) {
+        items.push(item.path)
+      }
+    })
     .on("end", () => resolve(items))
     .on("error", reject);
   });
