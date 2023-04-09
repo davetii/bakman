@@ -57,7 +57,6 @@ yargs(hideBin(process.argv))
     (argv) => { 
         console.log(readFileStats(argv.source));
   })
-
   .demandCommand(1)
   .parse();
 

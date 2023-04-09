@@ -5,12 +5,14 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "mocha file-utils-test.js"
+    "test": "mocha *-test.js" 
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "fsprogress": "^1.0.0",
     "klaw": "^4.1.0",
+    "path": "^0.12.7",
     "yargs": "^17.6.2"
   },
   "devDependencies": {
