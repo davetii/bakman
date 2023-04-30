@@ -1,8 +1,7 @@
 import * as assert from 'assert';
-import { expect } from 'chai';
-import * as fu from './file-utils.js';
+import * as fu from '../file-utils.js';
 import {sep, resolve} from 'path';
-import * as su from './bakman-utils.js';
+import * as su from '../bakman-utils.js';
 
 describe('ensure file-utils function as expected', ()=> {
     

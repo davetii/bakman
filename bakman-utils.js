@@ -14,25 +14,24 @@ export function isListEmpty(list) {
 }
 
 export async function diffList(list1, list2) {
-    if(isListEmpty(list1) || isListEmpty(list2)) 
+    if(isListEmpty(list1) && isListEmpty(list2)) 
     return [];
+    if(isListEmpty(list1) && !isListEmpty(list2)) { return list2; }
+    if(!isListEmpty(list1) && isListEmpty(list2)) { return list1; }
     const items = [];
     let i=0;
     let x=0;
 
     for(i=0;i < list1.length; i++ ) 
     {
+        let found = false;
         for (x=0; x < list2.length; x++) {
-            if(list1[i] == list2[x]) { 
-                items.push(list2[x]); 
-                break;
-            }
+            if(list1[i] == list2[x]) { found = true; break; }
+        }
+        if(!found) {
+            items.push(list1[i]);
+            found = false;
         }
     }
     return items;
-    
-
-
-
-
 }
