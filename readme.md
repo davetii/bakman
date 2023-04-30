@@ -19,7 +19,6 @@ git clone
 
 
 ## TODO
-* test for path
 * Create path
 * File Copy function
 * Implement sqllite DB

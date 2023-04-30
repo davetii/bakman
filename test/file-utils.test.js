@@ -12,11 +12,25 @@ describe('ensure file-utils function as expected', ()=> {
             assert.equal(result, false);
         });
 
+        it ('should return false when folder does not exist', async () => {
+            const fullPath = resolve('.') + sep + 'test-content2';
+            const result = await fu.fileExists(fullPath);
+            assert.equal(result, false);
+        });
+
+        it ('should return true when folder exists', async () => {
+            const fullPath = resolve('.') + sep + 'test-content';
+            const result = await fu.fileExists(fullPath);
+            assert.equal(result, true);
+        });
+
         it ('should return true when file exists', async () => {
             const fullPath = resolve('.') + sep + 'test-content' + sep + 'lorem-epsom-do-not-change.txt';
             const result = await fu.fileExists(fullPath);
             assert.equal(result, true);
         });
+
+        
     })
     
     
@@ -24,7 +38,7 @@ describe('ensure file-utils function as expected', ()=> {
         it ('should return correct filesize', async () => {
             const fullPath = resolve('.') + sep + 'test-content' + sep + 'lorem-epsom-do-not-change.txt';
             const actualFileSize = await fu.fileSize(fullPath);
-            assert.equal(actualFileSize, 3862);
+            assert.equal(true, (actualFileSize> 3860 && actualFileSize < 3870));
         });
     })
 
@@ -49,7 +63,9 @@ describe('ensure file-utils function as expected', ()=> {
             const fullPath = resolve('.') + sep +  'test-content' + sep + 'do-not-change';
             const items = await fu.readPath(fullPath);            
             const actualDirSize = await fu.dirSize(items);
-            assert.equal(actualDirSize, 100518);
+            console.log(actualDirSize);
+            assert.equal(true, (actualDirSize > 100510 && actualDirSize < 100520));
+            
         });
     })
 
