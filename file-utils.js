@@ -31,7 +31,6 @@ export async function dirSize (items)  {
   });
 }
 
-
 export async function getFileNames (source)  {
   const items = [];
   source.forEach(element => {
@@ -60,4 +59,9 @@ export async function getChildren(path)  {
     .on("end", () => resolve(items))
     .on("error", reject);
   });
+
+
+  // make a directory await mkdir(outputPath)
+
+
 }
