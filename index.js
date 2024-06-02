@@ -1,6 +1,7 @@
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import * as fu from './file-utils.js';
+import * as mgr from './backman-manager.js';
 
 async function calcPathsFileSize(path) {
     const items = await fu.readPath(path);
@@ -23,6 +24,14 @@ async function readFileStats(path) {
     console.log(data);
 }
 
+async function startup() {
+  mgr.init();
+}
+
+async function addtosource(path) {
+  console.log("addtosource");
+  mgr.addSource(path);
+}
 
 
 yargs(hideBin(process.argv))
@@ -57,6 +66,23 @@ yargs(hideBin(process.argv))
     (argv) => { 
         console.log(readFileStats(argv.source));
   })
+
+  .command(
+    'startup', 
+    'init the app', 
+    {}, 
+    (argv) => { 
+        startup();
+  })
+
+  .command(
+    'addtosource', 
+    'add path to source', 
+    {}, 
+    (argv) => { 
+      addtosource(argv.source);
+  })
+
   .demandCommand(1)
   .parse();
 

@@ -19,8 +19,8 @@ git clone
 
 
 ## TODO
-* read a source directory in
-* Implement sqllite DB
+* scan a path and store it to json
+* read a json, scan a path, add changes
 * Create data model
 ** copy to backup location
 ** Add row to DB

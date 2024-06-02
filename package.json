@@ -5,11 +5,12 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "mocha test/*.test.js" 
+    "test": "mocha test/*.test.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "directory-tree": "^3.5.1",
     "fsprogress": "^1.0.0",
     "klaw": "^4.1.0",
     "path": "^0.12.7",

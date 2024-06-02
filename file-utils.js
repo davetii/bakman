@@ -2,6 +2,10 @@ import fsPromises from 'fs/promises';
 import fs from 'fs';
 import klaw from 'klaw';
 import path from 'path';
+//import {readdir} from 'fs/promises'
+//import {join} from 'path'
+
+//const dirTree = require("directory-tree");
 
 export async function fileExists (path) {
   try {
@@ -39,6 +43,12 @@ export async function getFileNames (source)  {
   return items;
 }
 
+export async function getDirTree (source)  {
+  console.log('getDirTree');
+  const tree = dirTree.directoryTree(source);
+  //return tree;
+}
+
 export async function readPath(path)  {
   return new Promise((resolve, reject) => {
     const items = []
@@ -48,6 +58,10 @@ export async function readPath(path)  {
     .on("error", reject);
   });
 }
+
+
+
+
 
 export async function getChildren(path)  {
   return new Promise((resolve, reject) => {
@@ -59,9 +73,5 @@ export async function getChildren(path)  {
     .on("end", () => resolve(items))
     .on("error", reject);
   });
-
-
-  // make a directory await mkdir(outputPath)
-
 
 }
