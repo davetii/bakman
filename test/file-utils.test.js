@@ -81,6 +81,15 @@ describe('ensure file-utils function as expected', ()=> {
         });
     })
 
+    context('ensure splitPathToArray returns expected', () => {
+        it ('should return correct array', async () => {
+            const p = 'c:\\dev-wks\\bakman\\test\\file-utils.test.js';
+
+            const items = fu.splitPathToArray(p);
+            assert.equal(items.length, 5);
+        });
+    })
+
     
     
 })

@@ -59,6 +59,15 @@ export async function readPath(path)  {
   });
 }
 
+export function splitPathToArray(path) {
+  // Split the path by directory separators (either '/' or '\')
+  console.log("entering splitPathToArray");
+  console.log(path);
+  const pathArray = path.split(/[\\/]/).filter(Boolean);
+  console.log(pathArray);
+  return pathArray;
+}
+
 export async function getChildren(path)  {
   return new Promise((resolve, reject) => {
     const items = []
@@ -69,5 +78,7 @@ export async function getChildren(path)  {
     .on("end", () => resolve(items))
     .on("error", reject);
   });
+
+  
 
 }

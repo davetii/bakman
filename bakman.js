@@ -62,7 +62,6 @@ export async function fileCopy(src, target) {
        } catch (error) {
         console.log(error);
        }
-
     } else {
         // figure out how far back to create
     }
