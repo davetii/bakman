@@ -1,7 +1,7 @@
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import * as fu from './file-utils.js';
-import * as mgr from './backman-manager.js';
+import * as mgr from './bakman-manager.js';
 
 async function calcPathsFileSize(path) {
     const items = await fu.readPath(path);
@@ -31,6 +31,11 @@ async function startup() {
 async function addtosource(path) {
   console.log("addtosource");
   mgr.addSource(path);
+}
+
+async function copyFile(srcPath, destPath) {
+  console.log("copyfile");
+  mgr.fileCopy(srcPath, destPath)
 }
 
 
@@ -82,6 +87,15 @@ yargs(hideBin(process.argv))
     (argv) => { 
       addtosource(argv.source);
   })
+
+  .command(
+    'copyfile', 
+    'Copy file from here to their', 
+    {}, 
+    (argv) => { 
+      copyFile(argv.source, argv.target);
+  })
+
 
   .demandCommand(1)
   .parse();

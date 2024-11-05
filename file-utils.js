@@ -59,10 +59,6 @@ export async function readPath(path)  {
   });
 }
 
-
-
-
-
 export async function getChildren(path)  {
   return new Promise((resolve, reject) => {
     const items = []

@@ -1,12 +1,19 @@
-import {sep, resolve} from 'path';
+import {sep, resolve, dirname} from 'path';
 import * as fu from './file-utils.js';
-import { writeFile, readFile } from 'fs/promises'
+import { writeFile, readFile , copyFile } from 'fs/promises'
+
 
 let isInit = false;
 let sourceContent = { paths : []};
 let fullyPathedSourceFileName = "";
 
+function callback(err) {
+    if (err) throw err;
+    console.log('source.txt was copied to destination.txt');
+  }
+
 export async function init() {
+
     const approot = resolve('.');
     fullyPathedSourceFileName = approot + sep + defSourceFileName;
     console.log("Where am I? " + approot);
@@ -41,7 +48,26 @@ export async function addSource(s) {
         console.log(JSON.stringify(sourceContent));
         await writeFile(fullyPathedSourceFileName, JSON.stringify(sourceContent), 'utf8');
     }
+}
+
+export async function fileCopy(src, target) {
+    const isSourceExists = await fu.fileExists(src);
+    const isTargetExists = await fu.fileExists(target);
+    const isFolderExists = await fu.fileExists(dirname(target));
+    console.log("srcPath: " + src + " isSourceExists: " + isSourceExists);
+    console.log("destPath: " + target + " isTargetExists: " + isTargetExists + " isFolderExists: " + isFolderExists);
+    if (isFolderExists) {
+       try {
+        await copyFile(src, target);
+       } catch (error) {
+        console.log(error);
+       }
+
+    } else {
+        // figure out how far back to create
+    }
     
+
 }
 
 export const defSourceFileName = "source.json";
