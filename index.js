@@ -2,6 +2,7 @@ import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import * as fu from './file-utils.js';
 import * as bman from './bakman.js';
+import {writeFile} from "./file-utils.js";
 
 async function calcPathsFileSize(path) {
     const items = await fu.readPath(path);
@@ -10,8 +11,9 @@ async function calcPathsFileSize(path) {
 }
 
 async function displayPath(path, depth) {
-    const items = await fu.readPath(path, depth);
-    console.log(items);
+    const tree = await fu.readPath(path, depth);
+    await fu.writeFile("c:\\tmp\\tmp.json", JSON.stringify(tree));
+    console.log("check file");
 }
 
 async function readFileSize(path) {

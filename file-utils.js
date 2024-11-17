@@ -22,8 +22,7 @@ export async function fileSize (path) {
 }
 
 export async function fileStats (path) {  
-  const stats = await fsPromises.stat(path)
-  return stats;
+  return await fsPromises.stat(path);
 }
 
 export async function dirSize (items)  {
@@ -48,17 +47,59 @@ export async function getDirTree (source)  {
   return dirTree.directoryTree(source);
 }
 
-export async function readPath(path, depth)  {
-  return new Promise((resolve, reject) => {
-    const options = {
-      depthLimit: depth
+export async function readPath(rootPath, depth)  {
+
+  const options = {
+    depthLimit: depth ? depth : 0
+  };
+
+  const tree = {
+    name: path.basename(rootPath),
+    type: 'd',
+    children: []
+  };
+
+  // Keep track of all directories and their corresponding nodes in the tree
+  const dirMap = new Map();
+  dirMap.set(rootPath, tree);
+
+  // Process each item in the directory
+  const items = [];
+  for await (const item of klaw(rootPath, options)) {
+    items.push(item);
+  }
+
+  // Sort items so directories come before their contents
+  items.sort((a, b) => a.path.localeCompare(b.path));
+
+  // Process each item and build the tree
+  for (const item of items) {
+    const itemPath = item.path;
+    const parentPath = path.dirname(itemPath);
+    const isDirectory = item.stats.isDirectory();
+
+    // Skip the root directory as it's already in the tree
+    if (itemPath === rootPath) continue;
+
+    const parentNode = dirMap.get(parentPath);
+    if (!parentNode) {
+      throw new Error(`Parent directory node not found for ${itemPath}`);
+    }
+
+    const node = {
+      name: path.basename(itemPath),
+      type: isDirectory ? 'd' : 'f'
     };
-    const items = [];
-    klaw(path, options)
-    .on('data', item => { items.push(item.path) })
-    .on("end", () => resolve(items))
-    .on("error", reject);
-  });
+
+    if (isDirectory) {
+      node.children = [];
+      dirMap.set(itemPath, node);
+    }
+
+    parentNode.children.push(node);
+  }
+
+  return tree;
 }
 
 export function splitPathToArray(path) {
@@ -70,6 +111,16 @@ export function splitPathToArray(path) {
   return pathArray;
 }
 
+export async function writeFile(filePath, content = '') {
+  try {
+    await fsPromises.writeFile(filePath, content);
+    console.log('File created successfully');
+  } catch (error) {
+    console.error('Error creating file:', error);
+  }
+}
+
+
 export async function getChildren(path)  {
   return new Promise((resolve, reject) => {
     const items = []
@@ -80,6 +131,8 @@ export async function getChildren(path)  {
     .on("end", () => resolve(items))
     .on("error", reject);
   });
+
+
 
   
 
