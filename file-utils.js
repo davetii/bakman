@@ -45,14 +45,16 @@ export async function getFileNames (source)  {
 
 export async function getDirTree (source)  {
   console.log('getDirTree');
-  const tree = dirTree.directoryTree(source);
-  //return tree;
+  return dirTree.directoryTree(source);
 }
 
-export async function readPath(path)  {
+export async function readPath(path, depth)  {
   return new Promise((resolve, reject) => {
-    const items = []
-    klaw(path)
+    const options = {
+      depthLimit: depth
+    };
+    const items = [];
+    klaw(path, options)
     .on('data', item => { items.push(item.path) })
     .on("end", () => resolve(items))
     .on("error", reject);

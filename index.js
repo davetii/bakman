@@ -9,8 +9,8 @@ async function calcPathsFileSize(path) {
     promise.then((data) => console.log("data: " + data));
 }
 
-async function displayPath(path) {
-    const items = await fu.readPath(path);
+async function displayPath(path, depth) {
+    const items = await fu.readPath(path, depth);
     console.log(items);
 }
 
@@ -45,7 +45,7 @@ yargs(hideBin(process.argv))
     'readpath', 
     'read the path', 
     {}, 
-    (argv) => { displayPath(argv.source);
+    (argv) => { displayPath(argv.source, argv.depth);
   })
 
   .command(
